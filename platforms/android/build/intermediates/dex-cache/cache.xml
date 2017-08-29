@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="D:\xampp\htdocs\eyeside\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\libs\internal_impl-24.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="f78c2f395cb096f9dc1dc07e729922b8fcd3c4f5">
+        <dex dex="D:\xampp\htdocs\eyeside\platforms\android\build\intermediates\pre-dexed\debug\internal_impl-24.1.1_71764e18d3e75e3f345b1653049d12c320276435.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\xampp\htdocs\eyeside\platforms\android\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="6d7d803871e3203465f71a163e7af104f807b446">
+        <dex dex="D:\xampp\htdocs\eyeside\platforms\android\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.1.1_ddef9c2a25ab1332517e3599cadf1e86ada5e36c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\xampp\htdocs\eyeside\platforms\android\build\intermediates\exploded-aar\org.apache.cordova\CordovaLib\6.2.3\debug\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="7a1530ac850543228ac856fe951d258efe29f918">
+        <dex dex="D:\xampp\htdocs\eyeside\platforms\android\build\intermediates\pre-dexed\debug\CordovaLib-6.2.3-debug_bd0dc98536103afad7792e167f2ba60647e22ad3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ebenk\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.1.1\support-annotations-24.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
+        <dex dex="D:\xampp\htdocs\eyeside\platforms\android\build\intermediates\pre-dexed\debug\support-annotations-24.1.1_79c75a3e5c6974a840ebe72a6db3408d0140ea91.jar" />
+    </item>
+
+</items>
