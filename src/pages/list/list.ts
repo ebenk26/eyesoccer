@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
@@ -16,7 +17,7 @@ export class ListPage {
   lastImage: string = null;
 	loading: Loading;
 	
-  constructor(public navCtrl: NavController, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController) { }
+  constructor(public navCtrl: NavController, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage) { }
  
 	public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -83,7 +84,8 @@ export class ListPage {
 	// Copy the image to a local folder
 	private copyFileToLocalDir(namePath, currentName, newFileName) {
 	  this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-		this.lastImage = newFileName;
+		// this.lastImage = newFileName;
+		this.lastImage = storage.get('phonestorage');
 	  }, error => {
 		this.presentToast('Error while storing file.');
 	  });

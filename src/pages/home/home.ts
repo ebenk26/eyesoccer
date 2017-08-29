@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import {ListPage} from '../list/list';
 
@@ -19,7 +20,7 @@ export class HomePage {
 	lastImage: string = null;
 	loading: Loading;
 	
-  constructor(public navCtrl: NavController, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController) { }
+  constructor(public navCtrl: NavController, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage) { }
 
   pushPage(){
     // push another page on to the navigation stack
@@ -76,6 +77,7 @@ export class HomePage {
 		  var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
 		  var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
 		  this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+		  this.navCtrl.push(ListPage);
 		}
 	  }, (err) => {
 		this.presentToast('Error while selecting image.');
@@ -92,8 +94,10 @@ export class HomePage {
 	 
 	// Copy the image to a local folder
 	private copyFileToLocalDir(namePath, currentName, newFileName) {
+	Storage.set('photostorage',newFileName);
 	  this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
 		this.lastImage = newFileName;
+		
 	  }, error => {
 		this.presentToast('Error while storing file.');
 	  });

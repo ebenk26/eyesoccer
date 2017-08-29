@@ -36,6 +36,7 @@
 
 
 	</style>
+	
 	<script src="assets/Eyesoccer_files/a_002" async="" type="text/javascript"></script>
 	<script async="" src="assets/Eyesoccer_files/596cf64cb69de60011989f08.js"></script>
 	<script type="text/javascript" async="" src="assets/Eyesoccer_files/js15_as.js"></script>
@@ -370,7 +371,7 @@
   </div>
 </div>
 
-</nav><br><br><br>
+</nav>
 <style>
 .btn-circle {
     width: 30px;
@@ -397,6 +398,8 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
+	 
+ 
       <h1 class="text-center" id="t1">SIGN IN</h1>
       <div class="form-group"><input name="username" class="form-control" id="ipt1" type="text"></div>
       </div>
@@ -410,7 +413,7 @@
     <div class="modal-content" width="80%">
     <div class="modal-header text-center"><h1 id="t3">MASUK</h1></div>
       <div class="modal-body">
- 
+  <img src="{{pathForImage(lastImage)}}" id="lastImageView" style="width: 100%" [hidden]="lastImage === null">
     <ul class="nav nav-tabs">
 		<li class="active"><a data-toggle="tab" href="#tab-login" id="a4">Masuk</a></li>
 		<li class=""><a data-toggle="tab" href="#tab-daftar" id="a4">Daftar</a></li>
@@ -563,7 +566,7 @@
 <div class="col-lg-1 col-md-1 hidden-xs hidden-sm" id="back1"><br><br>
 
 <div class="bg-menu img-hover">
-	<a data-toggle="modal" data-target="#mlogin" class="btn btn-warning btn-sm btn-block">MASUK</a><br>
+	<a data-toggle="modal" id="mloginbtn" data-target="#mlogin" class="btn btn-warning btn-sm btn-block">MASUK</a><br>
 <a href="https://eyesoccer.id/list_pemain" title="pemain"><img src="" class="img img-responsive" id="set4"></a></div>
 <!--<div class="bg-menu img-hover"><a href="#" title="wasit"><img src="https://eyesoccer.id/img/a22.png" class="img img-responsive" id="set4"></a></div>-->
 <div class="bg-menu img-hover"><a href="https://eyesoccer.id/list_klub" title="klub"><img src="" class="img img-responsive" id="set4"></a></div>
@@ -1207,10 +1210,15 @@
 <input id="totaltube" value="4" type="hidden">
 
 <!-- update rizki start-->
-<div>
-<ion-icon class="ion-camera"></ion-icon>
-</div>
-<nav class="c-circle-menu js-menu">
+<nav class="c-circle-menu" style="background-color: whitesmoke;border: 1px solid black;left: 12px;padding: 5px;">
+<img style="width: 48px;left: 12px;" src="assets/Eyesoccer_files/camera1600.png">
+</nav>
+<nav class="c-circle-menu" style="background-color: whitesmoke;border: 1px solid black;right: 12px;padding: 5px;" (click)="presentActionSheet()">
+
+       <img style="width: 48px;left: 12px;" src="assets/Eyesoccer_files/camera-512.png">
+
+</nav>
+<nav class="c-circle-menu js-menu" style="right: 44%;">
 <img style="width: 48px;" src="assets/Eyesoccer_files/imageedit_6_8277776047.png" class="c-circle-menu__toggle2 js-menu-toggle">
   <button class="c-circle-menu__toggle js-menu-toggle" style="display:none">
     <span>Toggle</span>
@@ -1401,11 +1409,14 @@ hs.src = ('//s10.histats.com/js15_as.js');
 })();</script>
 <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?3847420&101" alt="free geoip" border="0"></a></noscript>
 <!-- Histats.com  END  -->
-
 <script type="text/javascript">
  
+   $(".mdl1").show();
    $(document).ready(function() {
-	   
+	  $("#lastImageView").load(function(){
+	  alert("tes");
+	  
+	  })
 	$("body").on("focus","#userPw",function(){
 		$(this).val("");
 	})	
