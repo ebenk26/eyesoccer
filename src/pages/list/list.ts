@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { NavParams } from 'ionic-angular';
+
+import {EyemeListPage} from '../eyeme/eyeme';
 
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
@@ -17,8 +20,14 @@ export class ListPage {
   lastImage: string = null;
 	loading: Loading;
 	
-  constructor(public navCtrl: NavController, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage) { }
+  constructor(private navParams: NavParams, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage, public navCtrl: NavController) { 
+	let filename = navParams.get('filename');
+    let curname = navParams.get('curname');
+    let corpath = navParams.get('corpath');
+	this.copyFileToLocalDir(corpath, curname, filename);
+  }
  
+	param = {}
 	public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Image Source',
@@ -83,9 +92,9 @@ export class ListPage {
 	 
 	// Copy the image to a local folder
 	private copyFileToLocalDir(namePath, currentName, newFileName) {
+		
 	  this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-		// this.lastImage = newFileName;
-		this.lastImage = storage.get('phonestorage');
+		this.lastImage = newFileName;
 	  }, error => {
 		this.presentToast('Error while storing file.');
 	  });
@@ -124,7 +133,7 @@ export class ListPage {
 		fileName: filename,
 		chunkedMode: false,
 		mimeType: "multipart/form-data",
-		params : {'fileName': filename}
+		params : {'fileName': filename, 'param': this.param}
 	  };
 	 
 	  const fileTransfer: TransferObject = this.transfer.create();
@@ -137,10 +146,18 @@ export class ListPage {
 	  // Use the FileTransfer to upload the image
 	  fileTransfer.upload(targetPath, url, options).then(data => {
 		this.loading.dismissAll()
-		this.presentToast('Image succesful uploaded.');
+		// this.presentToast('Image succesful uploaded.');
+		this.presentToast(JSON.stringify(data));
+		// alert(JSON.stringify(data));
+		this.navCtrl.push(EyemeListPage, {
+			filename: "",
+			curname: "",
+			corpath: ""
+		});
 	  }, err => {
 		this.loading.dismissAll()
 		this.presentToast('Error while uploading file.');
+		// alert(JSON.stringify(err));
 	  });
 	}
 }

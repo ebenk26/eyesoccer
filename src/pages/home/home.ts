@@ -3,6 +3,7 @@ import { NavController, ActionSheetController, ToastController, Platform, Loadin
 import { Storage } from '@ionic/storage';
 
 import {ListPage} from '../list/list';
+import {EyemeListPage} from '../eyeme/eyeme';
 
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
@@ -16,7 +17,7 @@ declare var cordova: any;
   templateUrl: 'home.html'
 })
 export class HomePage {
-	aboutPage = ListPage;
+	aboutPage = EyemeListPage;
 	lastImage: string = null;
 	loading: Loading;
 	
@@ -72,12 +73,22 @@ export class HomePage {
 			  let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
 			  let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
 			  this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+				this.navCtrl.push(ListPage, {
+					filename: this.createFileName(),
+					curname: currentName,
+					corpath: correctPath
+				});
 			});
 		} else {
 		  var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
 		  var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
 		  this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-		  this.navCtrl.push(ListPage);
+		  // this.navCtrl.push(ListPage);
+		  this.navCtrl.push(ListPage, {
+			  filename: this.createFileName(),
+			  curname: currentName,
+			  corpath: correctPath
+			});
 		}
 	  }, (err) => {
 		this.presentToast('Error while selecting image.');
@@ -94,7 +105,7 @@ export class HomePage {
 	 
 	// Copy the image to a local folder
 	private copyFileToLocalDir(namePath, currentName, newFileName) {
-	Storage.set('photostorage',newFileName);
+	// Storage.set('photostorage',newFileName);
 	  this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
 		this.lastImage = newFileName;
 		
