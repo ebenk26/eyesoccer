@@ -19,6 +19,7 @@ declare var cordova: any;
 export class ListPage {
   lastImage: string = null;
 	loading: Loading;
+	caption: string = null;
 	
   constructor(private navParams: NavParams, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage, public navCtrl: NavController) { 
 	let filename = navParams.get('filename');
@@ -133,7 +134,7 @@ export class ListPage {
 		fileName: filename,
 		chunkedMode: false,
 		mimeType: "multipart/form-data",
-		params : {'fileName': filename, 'param': this.param}
+		params : {'fileName': filename, 'param': this.caption}
 	  };
 	 
 	  const fileTransfer: TransferObject = this.transfer.create();

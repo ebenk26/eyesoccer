@@ -9,7 +9,19 @@
 <ion-content padding>
   <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
   <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
-  <ion-input type="text" [(ngModel)]="param.caption" placeholder="caption"></ion-input>
+  
+  <ion-list>
+
+   <ion-item>
+     <ion-label>Caption</ion-label>
+     <ion-input type="text" [(ngModel)]="caption"></ion-input>
+   </ion-item>
+   <ion-item>
+     <ion-label>Publish</ion-label>
+     <ion-checkbox [(ngModel)]="checkboxpub" (ionChange)="updateCheckboxpub()"></ion-checkbox>
+   </ion-item>
+
+ </ion-list>
 </ion-content>
  
 <ion-footer>
