@@ -22,7 +22,7 @@ export class HomePage {
 	loading: Loading;
 	
   constructor(public navCtrl: NavController, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage) { }
-
+	
   pushPage(){
     // push another page on to the navigation stack
     // causing the nav controller to transition to the new page
@@ -61,6 +61,8 @@ export class HomePage {
 		quality: 100,
 		sourceType: sourceType,
 		saveToPhotoAlbum: false,
+		targetWidth: 300,
+	    targetHeight: 300,
 		correctOrientation: true
 	  };
 	 

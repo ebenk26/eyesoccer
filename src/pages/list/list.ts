@@ -20,6 +20,7 @@ export class ListPage {
   lastImage: string = null;
 	loading: Loading;
 	caption: string = null;
+	checkboxpub: boolean;
 	
   constructor(private navParams: NavParams, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage, public navCtrl: NavController) { 
 	let filename = navParams.get('filename');
@@ -29,6 +30,11 @@ export class ListPage {
   }
  
 	param = {}
+	
+	updateCheckboxpub() {
+		this.checkboxpub = this.checkboxpub;
+	  }
+	
 	public presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Image Source',
@@ -134,7 +140,7 @@ export class ListPage {
 		fileName: filename,
 		chunkedMode: false,
 		mimeType: "multipart/form-data",
-		params : {'fileName': filename, 'param': this.caption}
+		params : {'fileName': filename, 'param': this.caption, 'checkbox': this.checkboxpub}
 	  };
 	 
 	  const fileTransfer: TransferObject = this.transfer.create();

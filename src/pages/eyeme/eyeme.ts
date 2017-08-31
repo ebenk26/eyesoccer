@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
@@ -18,11 +19,16 @@ export class EyemeListPage {
   lastImage: string = null;
 	loading: Loading;
 	
-  constructor(private navParams: NavParams, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage) { 
+  constructor(public navCtrl: NavController,private navParams: NavParams, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage) { 
 	let filename = navParams.get('filename');
     let curname = navParams.get('curname');
     let corpath = navParams.get('corpath');
   }
  
+	backButtonAction(){
+		/* exits the app, since this is the main/first tab */
+		// this.platform.exitApp();
+		this.navCtrl.setRoot(HomePage); 
+    }
 	
 }
