@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, Navbar, ActionSheetController, ToastController, Platform, LoadingController, Loading } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
 
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
@@ -16,19 +15,20 @@ declare var cordova: any;
   templateUrl: 'eyeme.html'
 })
 export class EyemeListPage {
+@ViewChild(Navbar) navBar:Navbar;
   lastImage: string = null;
 	loading: Loading;
 	
-  constructor(public navCtrl: NavController,private navParams: NavParams, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage) { 
+  constructor(public nav:NavController,private navParams: NavParams, private camera: Camera, private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController, private storage: Storage) { 
 	let filename = navParams.get('filename');
     let curname = navParams.get('curname');
     let corpath = navParams.get('corpath');
   }
- 
-	backButtonAction(){
-		/* exits the app, since this is the main/first tab */
-		// this.platform.exitApp();
-		this.navCtrl.setRoot(HomePage); 
+ ionViewDidLoad() {
+        this.navBar.backButtonClick = (e:UIEvent) => {
+            console.log("Back button clicked");
+            this.nav.parent.viewCtrl.dismiss();
+        };
     }
 	
 }
